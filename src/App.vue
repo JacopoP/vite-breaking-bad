@@ -3,14 +3,17 @@ import axios from 'axios';
 import { store } from './store'
 import CardList from './components/CardList.vue'
 import Filter from './components/FilterSearch.vue'
+import Counter from './components/Counter.vue'
 export default {
     components: {
         CardList,
         Filter,
+        Counter,
     },
     data() {
         return {
             store,
+            x: 0,
         }
     },
     methods: {
@@ -28,8 +31,8 @@ export default {
                     console.log("Errori", err);
                 });
         },
-        debug: function () {
-            console.log(store.searchText)
+        changeNumber: function () {
+            return this.store.characterList.length;
         }
     },
     mounted() {
@@ -40,8 +43,9 @@ export default {
 
 <template>
     <h1>Rick and Morty app</h1>
-    <Filter @filtertxt="getFromAPI" />
+    <Filter @filtertxt="getFromAPI(); changeNumber();" />
     <CardList />
+    <Counter :counter="changeNumber()" />
 </template>
 
 <style lang="scss">
