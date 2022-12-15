@@ -3,19 +3,14 @@ import { store } from '../store'
 export default {
     data() {
         return {
-            aux: '',
+            store,
         }
     },
-    methods: {
-        getFilterText: function () {
-            store.searchText = this.aux;
-        }
-    }
 }
 </script>
 
 <template>
-    <select @change="getFilterText(); $emit('filtertxt');" id="ciao" v-model="this.aux">
+    <select @change="$emit('filtertxt')" v-model="this.store.searchText">
         <option value="">All</option>
         <option value="alive">Alive</option>
         <option value="dead">Dead</option>
